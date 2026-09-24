@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>GitHubユーザー検索</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100 p-8 min-h-screen">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow p-6">
+      <h1 class="text-2xl font-bold mb-4">GitHubユーザー検索</h1>
+
+      <!-- 入力フォーム -->
+      <div class="space-y-4">
+        <input
+          type="text"
+          id="usernameInput"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="GitHubユーザー名を入力"
+        >
+
+        <button
+          id="searchBtn"
+          class="w-full bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700"
+        >
+          検索する
+        </button>
+
+        <p id="message" class="text-sm font-medium"></p>
+      </div>
+
+      <!-- 結果表示 -->
+      <div id="result" class="mt-6"></div>
+    </div>
+
+    <script>
+      const input = document.getElementById("usernameInput");
+      const btn = document.getElementById("searchBtn");
+      const result = document.getElementById("result");
+      const message = document.getElementById("message");
+
+      btn.addEventListener("click", async () => {
+        const username = input.value.trim();
+        result.innerHTML = "";
+        message.textContent = "";
+
+        if (username === "") {
+          message.textContent = "ユーザー名を入力してください";
+          message.className = "text-sm font-medium text-red-500";
+          return;
+        }
+
+        try {
+          const response = await fetch(`https://api.github.com/users/${username}`);
+
+          if (!response.ok) {
+            message.textContent = "ユーザーが見つかりませんでした";
+            message.className = "text-sm font-medium text-red-500";
+            return;
+          }
+
+          const data = await response.json();
+          console.log(data); // どのプロパティを使うか確認
+
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-lg shadow p-4";
+
+          card.innerHTML = `
+            <img src="${data.avatar_url}" alt="avatar" class="w-24 h-24 rounded-full mx-auto mb-4">
+            <h2 class="text-lg font-bold text-center">${data.name ?? "名前なし"}</h2>
+            <p class="text-center text-gray-600 mt-2">${data.bio ?? "自己紹介なし"}</p>
+            <p class="text-center text-gray-700 mt-2">フォロワー: ${data.followers}</p>
+          `;
+
+          result.appendChild(card);
+
+        } catch (error) {
+          message.textContent = "通信エラーが発生しました";
+          message.className = "text-sm font-medium text-red-500";
+          console.error(error);
+        }
+      });
+    </script>
+  </body>
+</html>
