@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>チームメンバー一覧</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100 p-8">
+    <h1 class="text-2xl font-bold mb-6">チームメンバー</h1>
+
+    <!-- カードを差し込むコンテナ -->
+    <div id="memberList" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+
+    <script>
+      // ★ 役割順（PM → Engineer → Designer）で並べた理由：
+      // 「チームの流れ（企画→実装→デザイン確認）」が一目で分かるようにするため。
+      const members = [
+        { name: "佐藤次郎", role: "PdM",       comment: "ユーザー視点を大切にしています" },
+        { name: "鈴木花子", role: "エンジニア", comment: "バックエンドが得意です" },
+        { name: "山田太郎", role: "エンジニア", comment: "フロントの改善を担当しています" },
+        { name: "田中太郎", role: "デザイナー", comment: "UIにこだわっています" },
+        { name: "高橋健",   role: "デザイナー", comment: "ブランドトーンの統一を担当" },
+      ];
+
+      const memberList = document.getElementById("memberList");
+
+      // forEachでカード生成
+      members.forEach((member) => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-lg shadow p-4";
+
+        card.innerHTML = `
+          <h2 class="text-lg font-bold">${member.name}</h2>
+          <p class="text-blue-600 text-sm">${member.role}</p>
+          <p class="text-gray-600 mt-2">${member.comment}</p>
+        `;
+
+        memberList.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
