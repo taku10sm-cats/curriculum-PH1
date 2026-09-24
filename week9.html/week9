@@ -1,0 +1,60 @@
+<form id="signupform">
+    <label for= "userName”>お名前</label>
+    <input type ="text” id ="userName" name ="userName">
+
+    <button type ”submit”>送信</button>
+
+    <label for="name">お名前</label>
+    <input type="text" id="name" placeholder="山田太郎">
+    <label for="email">メールアドレス</label>
+    <input type="email" id="email" placeholder="example@mail.com">
+
+    <input type="password" id="password">
+    <input type=”checkbox” id="agree">
+    <input type="radio" id="agree">
+    <input type="radio" name="plan" value="pro" id="plampro">
+    
+
+<textarea id="message" rows="4" placeholder=""メッセージを入力してください”></textarea>
+
+
+<select id="plan">
+    <option value="">>選択してくださいい</option>
+    <option value="free">フリープラン</option>
+    <option value="pro">>プロプラン</option>
+    <option value="normal">>ノーマルプラン</option>
+</select>
+
+
+const nameInput = document.getElementById("name");
+console.log(nameInput.value); //  入力されたテキスト
+
+<input type="text" id="name">
+<button id="btn">>確認</button>
+
+document.getElementById("btn").addEventListener("click", () => { const value = document.getElementById("name").value; console.log(value);}]);
+ const agreemcheckbox = document.getElementById("agree");
+ console.log(agreeCheckbox.checked); // チェックされていれば true
+
+ <input type="button" id="password" minlengh="8" requiired>
+
+
+<form id="signupform">
+    <input type="email" id="email" required>
+    <button type="submit">>送信</button>
+</form>
+
+const form = document.gentElementById("signupform");
+
+form.addEleventListener("submit", (event) => {event.prevent})
+
+
+connst form = document.getElementById("sighnupform");
+ form.addEventListener("submit", (event) => { event.preventDefault(); //　ページリロードを止める）
+    
+    ・・　ここにバリデーションや処理を書く
+    xonsole.log("フォームが送信されました”）；｝);
+        )
+
+
+
